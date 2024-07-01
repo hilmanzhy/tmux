@@ -15,9 +15,9 @@ vpn_function() {
     vpn=$(scutil --nc list | grep Connected)
 
     if [ -z $vpn ]; then
-      echo ""
+      echo "VPN Disabled"
     else
-      echo "VPN"
+      echo "VPN Enabled"
     fi
     ;;
 

@@ -16,18 +16,18 @@ main()
   show_fahrenheit=$(get_tmux_option "@dracula-show-fahrenheit" true)
   show_location=$(get_tmux_option "@dracula-show-location" true)
   fixed_location=$(get_tmux_option "@dracula-fixed-location")
-  show_powerline=$(get_tmux_option "@dracula-show-powerline" false)
+  show_powerline=$(get_tmux_option "@dracula-show-powerline" true)
   show_flags=$(get_tmux_option "@dracula-show-flags" false)
   show_left_icon=$(get_tmux_option "@dracula-show-left-icon" smiley)
   show_left_icon_padding=$(get_tmux_option "@dracula-left-icon-padding" 1)
   show_military=$(get_tmux_option "@dracula-military-time" false)
-  timezone=$(get_tmux_option "@dracula-set-timezone" "")
+  timezone=$(get_tmux_option "@dracula-set-timezone" "Jakarta")
   show_timezone=$(get_tmux_option "@dracula-show-timezone" true)
-  show_left_sep=$(get_tmux_option "@dracula-show-left-sep" )
-  show_right_sep=$(get_tmux_option "@dracula-show-right-sep" )
+  show_left_sep=$(get_tmux_option "@dracula-show-left-sep" false)
+  show_right_sep=$(get_tmux_option "@dracula-show-right-sep" false)
   show_border_contrast=$(get_tmux_option "@dracula-border-contrast" false)
   show_day_month=$(get_tmux_option "@dracula-day-month" false)
-  show_refresh=$(get_tmux_option "@dracula-refresh-rate" 5)
+  show_refresh=$(get_tmux_option "@dracula-refresh-rate" 30)
   show_synchronize_panes_label=$(get_tmux_option "@dracula-synchronize-panes-label" "Sync")
   time_format=$(get_tmux_option "@dracula-time-format" "")
   show_ssh_session_port=$(get_tmux_option "@dracula-show-ssh-session-port" false)
@@ -207,6 +207,10 @@ main()
     elif [ $plugin = "network-ping" ]; then
       IFS=' ' read -r -a colors <<<$(get_tmux_option "@dracula-network-ping-colors" "cyan dark_gray")
       script="#($current_dir/network_ping.sh)"
+
+    elif [ $plugin = "network-ip" ]; then
+      IFS=' ' read -r -a colors <<< $(get_tmux_option "@dracula-network-ip-colors" "cyan dark_gray")
+      script="#($current_dir/network-ip.sh)"
 
     elif [ $plugin = "network-vpn" ]; then
       IFS=' ' read -r -a colors <<<$(get_tmux_option "@dracula-network-vpn-colors" "cyan dark_gray")

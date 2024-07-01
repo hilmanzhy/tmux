@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
 # INTERVAL is equal to 1s because we want to express the bandwidth in sec
-readonly INTERVAL=1
+readonly INTERVAL=0
 
 # UPLOAD and DOWNLOAD index
 readonly UPLOAD=0
@@ -43,7 +43,6 @@ interface_bytes() {
   Linux)
     upload=$(cat "/sys/class/net/$1/statistics/tx_bytes")
     download=$(cat "/sys/class/net/$1/statistics/rx_bytes")
-
     echo "$upload $download"
     ;;
   Darwin)
@@ -61,8 +60,8 @@ get_bandwidth() {
   IFS=' ' read -r upload download <<< "$(interface_bytes "$1")"
 
   # wait for interval to calculate the difference
-  sleep "$INTERVAL"
-
+#  sleep "$INTERVAL"
+  sleep 5
   IFS=' ' read -r new_upload new_download <<< "$(interface_bytes "$1")"
 
   upload=$(( $new_upload - $upload ))
@@ -100,7 +99,7 @@ main() {
   interval_update="$(tmux show-option -gqv "@dracula-network-bandwidth-interval")"
 
   if [[ -z $interval_update ]]; then
-    interval_update=0
+    interval_update=30
   fi
 
   while true; do
