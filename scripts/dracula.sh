@@ -210,7 +210,7 @@ main()
 
     elif [ $plugin = "network-ip" ]; then
       IFS=' ' read -r -a colors <<< $(get_tmux_option "@dracula-network-ip-colors" "cyan dark_gray")
-      script="#($current_dir/network-ip.sh)"
+      script="#($current_dir/network_ip.sh)"
 
     elif [ $plugin = "network-vpn" ]; then
       IFS=' ' read -r -a colors <<<$(get_tmux_option "@dracula-network-vpn-colors" "cyan dark_gray")
